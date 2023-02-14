@@ -1,6 +1,12 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:new_app/components/circular_icon_box.dart';
+import 'package:new_app/components/container_one.dart';
+import 'package:new_app/components/container_two.dart';
+import 'package:new_app/components/my_appbar.dart';
+
+import 'components/small_bubble_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,81 +21,65 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       // backgroundColor:const Color(0x272639),
       backgroundColor: Colors.grey[900],
-      body: SafeArea(
-          child: Column(
-        children: [
-          //appbar------------------
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal:14.0,vertical: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[800],
-                      borderRadius: BorderRadius.circular(50)),
-                  padding: EdgeInsets.all(10),
-                  child: Icon(
-                    Icons.menu,
-                    color: Colors.white,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: Colors.orange[900],
-                  borderRadius: BorderRadius.circular(20)),
-                  child: Row(children: [
-                    Text("Today",style:TextStyle(color: Colors.white,fontSize: 14) ,)
-                  ,
-                  Icon(Icons.arrow_drop_down,color: Colors.white,)
-                  ],) ,
-                ),
-          
-                Stack(
-                  children: [
-                    Container(
-                      width: 100,
-                      color: Colors.white,
-          
-                    ),
-                    
-                    Positioned(
-                      left: 40,
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                        color: Colors.orange[800],
-                        borderRadius: BorderRadius.circular(50)),
-                                    padding: EdgeInsets.all(10),
-                    
-                        child: Icon(Icons.search,color: Colors.white,),
-                      ),
-                    ),
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                      color: Colors.grey[800],
-                      borderRadius: BorderRadius.circular(50)),
-                  padding: EdgeInsets.all(10),
-          
-                      child: Icon(Icons.notifications_active_outlined,color: Colors.white,),
-                    ),
-                  ],
-                ),
-          
-          
-              ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //appbar------------------
+            MyAppBar(),
+            SizedBox(
+              height: 10,
             ),
-          ),
-          //text Home---------------------
-          //horizontally scrollable small box--------------
-          //three big box
-        ],
-      )),
+            //text Home---------------------
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Home",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            //horizontally scrollable small box--------------
+            Container(
+              height: 35,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  SmallBubbleBox(
+                    name: "Top",
+                  ),
+                  SmallBubbleBox(
+                    name: "CS;GO",
+                  ),
+                  SmallBubbleBox(
+                    name: "Data 2",
+                  ),
+                  SmallBubbleBox(
+                    name: "FIFA",
+                  ),
+                  SmallBubbleBox(
+                    name: "CS:GO",
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+      
+            //three big box
+            ContainerOne(),
+            ContainerTwo(title1:"IEM Katowice",title2: "Faze vs liquid",icon1: Icons.bolt,icon2: Icons.headphones,),
+            ContainerTwo(title1: "LCS Spring",title2: "TSM vs Cloud9",icon1: Icons.circle,icon2: Icons.videogame_asset,)
+          ],
+        )),
+      ),
     );
   }
 }
